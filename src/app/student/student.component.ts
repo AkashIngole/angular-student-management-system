@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {Student} from '../student';
-import { STUDENTS } from './student-records';
+import { Student } from '../student';
+import { StudentService } from '../student.service';
 @Component({
   selector: 'app-student',
   templateUrl: './student.component.html',
@@ -8,7 +8,7 @@ import { STUDENTS } from './student-records';
 })
 export class StudentComponent implements OnInit {
 
-  students = STUDENTS;
+  students: Student[];
   selectedStudentAge: number;
   
   onSelect(age: number): void {
@@ -18,6 +18,12 @@ export class StudentComponent implements OnInit {
   }
 
   ngOnInit(): void {
+   this.geStudents(); 
+  }
+
+  geStudents(): void {
+    let obj = new StudentService();
+    this.students = obj.getStudents();
   }
 
 }
